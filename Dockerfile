@@ -24,8 +24,7 @@ ENV TARGET_DIRECTORY /usr/local
 RUN  curl -fsSL "https://storage.googleapis.com/tensorflow/libtensorflow/$TENSORFLOW_LIB_GZIP" -o $TENSORFLOW_LIB_GZIP && \
      sudo tar -C $TARGET_DIRECTORY -xzf $TENSORFLOW_LIB_GZIP && \
      rm -Rf $TENSORFLOW_LIB_GZIP
-RUN export LD_LIBRARY_PATH=$TARGET_DIRECTORY/lib:$LD_LIBRARY_PATH
-RUN export LIBRARY_PATH=$TARGET_DIRECTORY/lib:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH $TARGET_DIRECTORY/lib
+ENV LIBRARY_PATH $TARGET_DIRECTORY/lib
 RUN go get github.com/tensorflow/tensorflow/tensorflow/go
 #End: install tensorflow
-
